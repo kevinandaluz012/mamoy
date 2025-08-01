@@ -39,7 +39,6 @@
       line-height: 1.5;
       white-space: pre-line;
     }
-    /* Animación de corazones cayendo */
     .heart {
       position: fixed;
       width: 25px;
@@ -81,19 +80,6 @@
         opacity: 0;
       }
     }
-    /* Botón para reproducir música en móviles */
-    #playBtn {
-      margin-top: 20px;
-      background-color: #e91e63;
-      border: none;
-      color: white;
-      font-size: 1.2rem;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(233, 30, 99, 0.5);
-      user-select: none;
-    }
   </style>
 </head>
 <body>
@@ -110,11 +96,15 @@
       Gracias por existir y por estar conmigo, incluso cuando las circunstancias no son fáciles.
       Te amo más de lo que las palabras pueden decir.
     </p>
-    <button id="playBtn">▶️ Reproducir música</button>
   </div>
 
+  <!-- 🎵 Audio que se reproduce solo -->
+  <audio autoplay loop>
+    <source src="juanes-es-por-ti.mp3" type="audio/mpeg">
+    Tu navegador no soporta el audio.
+  </audio>
+
   <script>
-    // Crear varios corazones en posiciones aleatorias
     function crearCorazon() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
@@ -125,24 +115,7 @@
       setTimeout(() => heart.remove(), 6000);
     }
     setInterval(crearCorazon, 300);
-
-    // Audio con botón para móvil (porque autoplay falla en móviles)
-    const audio = new Audio('https://www.youtube.com/embed/h_zplWNgfmI?autoplay=1'); 
-    // NOTA: En HTML Audio no funciona con YouTube links, usar embed en iframe
-
-    // Por eso vamos a hacer embed en iframe para la música:
-    let iframeMusica = document.createElement('iframe');
-    iframeMusica.src = "https://www.youtube.com/embed/h_zplWNgfmI?autoplay=1&loop=1&playlist=h_zplWNgfmI";
-    iframeMusica.style.display = "none";
-    iframeMusica.allow = "autoplay";
-    document.body.appendChild(iframeMusica);
-
-    const playBtn = document.getElementById('playBtn');
-    playBtn.addEventListener('click', () => {
-      // Para móviles solo mostrar el iframe para que suene
-      iframeMusica.style.display = "block";
-      playBtn.style.display = 'none';
-    });
   </script>
 </body>
 </html>
+
