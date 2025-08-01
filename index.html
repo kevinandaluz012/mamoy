@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para mi novia ❤️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffc1cc 0%, #ffe5f0 100%);
+      font-family: 'Amatic SC', cursive, sans-serif;
+      color: #8b0f4e;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .contenedor {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 25px 40px;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(139, 15, 78, 0.4);
+      max-width: 600px;
+      z-index: 2;
+      position: relative;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.6rem;
+      line-height: 1.5;
+      white-space: pre-line;
+    }
+    /* Animación de corazones cayendo */
+    .heart {
+      position: fixed;
+      width: 25px;
+      height: 25px;
+      background-color: #e91e63;
+      transform: rotate(-45deg);
+      left: 50%;
+      top: -50px;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      opacity: 0.8;
+      z-index: 1;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background-color: #e91e63;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -12.5px;
+      left: 0;
+    }
+    .heart::after {
+      left: 12.5px;
+      top: 0;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(-45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+    /* Botón para reproducir música en móviles */
+    #playBtn {
+      margin-top: 20px;
+      background-color: #e91e63;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(233, 30, 99, 0.5);
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Eres lo mejor que me ha pasado en la vida ❤️</h1>
+    <p>
+      No tienes idea de cuánto te amo. Cada momento a tu lado vale más que mil palabras.
+      Sé que no podemos ser como las demás parejas, que debemos mantenernos en silencio,
+      pero aun así… me encanta cada instante contigo.
+
+      Me gusta todo de ti: tu forma de ser, tu risa, tu mirada...
+      Me gustas por dentro y por fuera, con cada detalle que te hace única.
+
+      Gracias por existir y por estar conmigo, incluso cuando las circunstancias no son fáciles.
+      Te amo más de lo que las palabras pueden decir.
+    </p>
+    <button id="playBtn">▶️ Reproducir música</button>
+  </div>
+
+  <script>
+    // Crear varios corazones en posiciones aleatorias
+    function crearCorazon() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 3 + Math.random() * 3 + 's';
+      heart.style.fontSize = (10 + Math.random() * 20) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(crearCorazon, 300);
+
+    // Audio con botón para móvil (porque autoplay falla en móviles)
+    const audio = new Audio('https://www.youtube.com/embed/h_zplWNgfmI?autoplay=1'); 
+    // NOTA: En HTML Audio no funciona con YouTube links, usar embed en iframe
+
+    // Por eso vamos a hacer embed en iframe para la música:
+    let iframeMusica = document.createElement('iframe');
+    iframeMusica.src = "https://www.youtube.com/embed/h_zplWNgfmI?autoplay=1&loop=1&playlist=h_zplWNgfmI";
+    iframeMusica.style.display = "none";
+    iframeMusica.allow = "autoplay";
+    document.body.appendChild(iframeMusica);
+
+    const playBtn = document.getElementById('playBtn');
+    playBtn.addEventListener('click', () => {
+      // Para móviles solo mostrar el iframe para que suene
+      iframeMusica.style.display = "block";
+      playBtn.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
